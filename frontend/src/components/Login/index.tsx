@@ -3,6 +3,12 @@ import DefaultHeader from "../Layout/DefaultHeader"
 import ResponsiveSection from "../Layout/Responsive"
 import LoginInput from "./Input"
 import { FcGoogle } from "react-icons/fc";
+import { getSession, signIn, useSession } from "next-auth/react";
+import Home from "@/pages";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { NextPageContext } from "next";
+
 
 
 interface LoginProps {
@@ -10,6 +16,9 @@ interface LoginProps {
 }
 
 const LoginPage:React.FC<LoginProps> = () => {
+
+    
+
     return (
         <>
             <DefaultHeader/>
@@ -18,7 +27,7 @@ const LoginPage:React.FC<LoginProps> = () => {
                     <h1 className="text-primary-font mb-4">Login</h1>
                     <p className="m-0 text-third-font mb-6">Welcome back! Login your account</p>
                 </div>
-                <form className="flex flex-col justify-center items-center gap-4" action="">
+                <div className="flex flex-col justify-center items-center gap-4">
                     <LoginInput label="" type="email" placeholder="Enter your e-mail"/>
                     <LoginInput label="" type="password" placeholder="Enter your password"/>
                     
@@ -35,22 +44,24 @@ const LoginPage:React.FC<LoginProps> = () => {
 
                     <p className="m-0 text-third-font">Or</p>
 
-                    <Link href="" className="text-primary-font bg-second-bg hover:bg-third-bg focus:ring-2 focus:ring-third-bg font-medium rounded-lg text-sm px-4 lg:px-5 py-2.5 mr-2 focus:outline-none flex flex-row justify-center items-center gap-2 w-full">
+                    <button onClick={()=>signIn("google")} className="text-primary-font bg-second-bg hover:bg-third-bg focus:ring-2 focus:ring-third-bg font-medium rounded-lg text-sm px-4 lg:px-5 py-2.5 mr-2 focus:outline-none flex flex-row justify-center items-center gap-2 w-full">
                         <FcGoogle/>
                         Login with Google
-                    </Link>
+                    </button>
                     
                     <div className="flex flex-row justify-between items-center gap-4">
                         <p className="m-0 text-third-font">Don't have an account?</p>
                         <Link className="m-0 text-primary-warning hover:text-second-warning" href="/signup">Sign Up Now</Link>
                     </div>
                     
-                </form>
+                </div>
                 <div className="login-footer"></div>
             </ResponsiveSection>
-        </>
-       
+            </>
+             
     )
 }
 
 export default LoginPage
+
+  

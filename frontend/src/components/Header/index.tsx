@@ -6,12 +6,16 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import HeaderButton from "./Button";
 import IconButton from "./Icon";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import { Session } from "next-auth";
 
 interface HeaderProps {
-
+    session: Session | null
 }
 
-const Header:React.FC<HeaderProps> = () => {
+const Header:React.FC<HeaderProps> = ({session}) => {
+    
+
     return (
         
         //------------------ HEADER -----------------//
@@ -47,9 +51,22 @@ const Header:React.FC<HeaderProps> = () => {
                 </div>
 
                 <div className="header-button ml-4">
-                    <Link href="/login">
-                        <HeaderButton text="login" icon={<BiLogIn/>}/>
-                    </Link>
+                    {!session ? (
+                        <Link href="/login">
+                            <HeaderButton text="login" icon={<BiLogIn/>}/>
+                        </Link>
+                    ) : (
+                        <>
+                        <Link href="/login">
+                            <Image src={Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px]"/>
+                        </Link>
+                        
+                            <HeaderButton text="login" icon={<BiLogIn/>} onClick={()=>signOut()}/>
+                        
+                        </>
+                        
+                    )}
+                    
                 </div>
 
             </div>

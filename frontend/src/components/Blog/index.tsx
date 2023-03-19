@@ -10,6 +10,7 @@ interface BlogProps {
 
 const Blog:React.FC<BlogProps> = () => {
     return (
+        
         <ResponsiveSection addClass="blog flex flex-col md:flex-row">
             <div className="blog-posts flex-col  md:w-2/3 mt-6">
                 <div className="blog-header flex flex-row justify-start items-center">

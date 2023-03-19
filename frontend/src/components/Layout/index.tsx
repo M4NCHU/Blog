@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import Categories from "../Categories";
 import Footer from "../Footer";
 import Header from "../Header";
@@ -7,9 +8,13 @@ interface MainLayoutProps {
 }
 
 const MainLayout:React.FC<MainLayoutProps> = ({children}) => {
+    
+    const { data: session } = useSession();
+    const sessionObj = session && session 
+
     return (
         <div className="flex flex-col min-h-screen">
-        <Header/>
+        <Header session={sessionObj} />
         <main>
             {children}
         </main>

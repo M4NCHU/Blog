@@ -1,6 +1,7 @@
 import ProfileImg from "../../../resources/categories-img/photo-1575936123452-b67c3203c357.jpeg"
 import {AiOutlineArrowUp,AiOutlineComment, AiOutlineShareAlt,AiOutlineArrowRight} from "react-icons/ai"
 import Link from "next/link"
+import Image from "next/image"
 
 interface PostProps {
     
@@ -11,7 +12,7 @@ const Post:React.FC<PostProps> = ({}) => {
         <div className="blog-post flex flex-row mt-4 mr-2 md:pr-4 tablet:pr-16 ">
             <div className="post-sidebar hidden md:block">
                 <div className="post-author">
-                    <img src={ProfileImg.src} alt="" className="w-12 h-12 rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
+                    <Image width="12" height="12" alt="profile image" src={ProfileImg.src} className="w-12 h-12 rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
                 </div>
                 <div className="post-reactions flex justify-center items-center border border-second-bg hover:bg-second-bg cursor-pointer w-12 h-12 my-2 rounded-lg text-third-font">
                     <div className="">
@@ -31,7 +32,7 @@ const Post:React.FC<PostProps> = ({}) => {
                 </div>
 
                 <div className="post-img">
-                    <img src={ProfileImg.src} alt="" className="w-full h-96 object-cover"/>
+                    <img alt="profile image"  src={ProfileImg.src} className="w-full h-96 object-cover"/>
                 </div>
 
                 <div className="post-title p-4 text-second-font">

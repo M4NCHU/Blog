@@ -44,6 +44,7 @@ const Header:React.FC<HeaderProps> = ({session}) => {
             {/* Header logo */}
             <div className="header-logo hover:bg-primary-bg cursor-pointer p-1 rounded-full">
                 <Link href="/">
+                    
                     <Image src={Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px]"/>
                 </Link>
             </div>

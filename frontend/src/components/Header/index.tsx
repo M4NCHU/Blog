@@ -8,6 +8,8 @@ import IconButton from "./Icon";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { Session } from "next-auth";
+import DropDownMenu from "./DropDownMenu/DropDownMenu";
+import { useRef, useState } from "react";
 
 interface HeaderProps {
     session: Session | null
@@ -15,6 +17,24 @@ interface HeaderProps {
 
 const Header:React.FC<HeaderProps> = ({session}) => {
     
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+    // create ref to dropdown element
+    const DropdownRef = useRef<HTMLDivElement>(null)
+
+    // Handle open dropdown
+    const handleOpenDropdown = (state:boolean) => {
+        setIsOpen(!state)
+    }
+
+    const handleClickOutsideDropdown = (e:any) => {
+        if (isOpen && !DropdownRef?.current?.contains(e.target as Node)) {
+            setIsOpen(false)
+        }
+    }
+
+    if (typeof window !== 'undefined') {
+    window.addEventListener("click",handleClickOutsideDropdown)
+    }
 
     return (
         
@@ -50,19 +70,18 @@ const Header:React.FC<HeaderProps> = ({session}) => {
                     </Link>
                 </div>
 
-                <div className="header-button ml-4">
+                <div className="header-button ml-4 re">
                     {!session ? (
                         <Link href="/login">
                             <HeaderButton text="login" icon={<BiLogIn/>}/>
                         </Link>
                     ) : (
                         <>
-                        <Link href="/login">
-                            <Image src={Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px]"/>
-                        </Link>
-                        
-                            <HeaderButton text="login" icon={<BiLogIn/>} onClick={()=>signOut()}/>
-                        
+                        <div className="drop-down-menu relative" ref={DropdownRef}  >
+                            <Image src={Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px] cursor-pointer" onClick={(e)=>handleOpenDropdown(isOpen)}/>
+                            <DropDownMenu isOpen={isOpen}/>
+                            {/* <HeaderButton text="login" icon={<BiLogIn/>} onClick={()=>signOut()}/> */}
+                        </div>
                         </>
                         
                     )}

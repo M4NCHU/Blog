@@ -11,6 +11,7 @@ module.exports = {
         "primary-bg": "var(--primary-bg-color)",
         "second-bg": "var(--second-bg-color)",
         "third-bg": "var(--third-bg-color)",
+        "forth-bg": "var(--forth-bg-color)",
 
         "primary-font": "var(--primary-font-color)",
         "second-font": "var(--second-font-color)",

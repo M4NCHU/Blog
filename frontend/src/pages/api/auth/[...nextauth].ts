@@ -26,10 +26,10 @@ export default NextAuth({
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
-//   callbacks: {
-//     async session({ session, token, user }) {
-//       console.log("inside sessi")
-//       return {...session, user: {...session.user, ...user} }
-//     },
-//   },
+  callbacks: {
+    async session({ session, token, user }) {
+      console.log(user)
+      return {...session, user: {...session.user, ...user} }
+    },
+  },
 })

@@ -3,23 +3,24 @@ import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import Categories from '@/components/Categories'
 import MainLayout from '@/components/Layout'
-import React, { useEffect } from 'react'
-import Blog from '@/components/Blog'
-import LoginPage from '@/components/Login'
-import { getSession, useSession } from 'next-auth/react'
+import React from 'react'
 import { useRouter } from 'next/router'
-import About from '../about'
+
 import { NextPageContext } from 'next'
 import { requireAuth } from '@/util/requireAuth'
+import dynamic from 'next/dynamic'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Login(page: React.ReactElement,) {
-  const {data:session, status} = useSession();
+  // const {data:session, status} = useSession();
   const router = useRouter();
-
+  const LoginPage = dynamic(()=>import("@/components/Login"), {
+    loading: () => <div>Loading...</div>,
+  })
     
   return (
+    
       <>
     <Head>
         <title>Blog - Login</title>

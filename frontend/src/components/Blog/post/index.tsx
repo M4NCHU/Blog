@@ -1,18 +1,20 @@
 import ProfileImg from "../../../resources/categories-img/photo-1575936123452-b67c3203c357.jpeg"
 import {AiOutlineArrowUp,AiOutlineComment, AiOutlineShareAlt,AiOutlineArrowRight} from "react-icons/ai"
 import Link from "next/link"
-import Image from "next/image"
+import Image from 'next/legacy/image'
 
 interface PostProps {
     
 }
 
 const Post:React.FC<PostProps> = ({}) => {
+    
+    console.log(ProfileImg)
     return (
         <div className="blog-post flex flex-row mt-4 mr-2 md:pr-4 tablet:pr-16 ">
             <div className="post-sidebar hidden md:block">
                 <div className="post-author">
-                    <Image width="12" height="12" alt="profile image" src={ProfileImg.src} className="w-12 h-12 rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
+                    <Image width={48} height={48} alt="profile image" src={ProfileImg.src} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
                 </div>
                 <div className="post-reactions flex justify-center items-center border border-second-bg hover:bg-second-bg cursor-pointer w-12 h-12 my-2 rounded-lg text-third-font">
                     <div className="">
@@ -25,14 +27,14 @@ const Post:React.FC<PostProps> = ({}) => {
             <div className="post-content bg-second-bg w-full ml-2 md:ml-8 rounded-lg">
                 <div className="post-header p-4 flex justify-between items-center">
                     <div className="flex flex-row gap-4 justify-center items-center">
-                        <img src={ProfileImg.src} alt="" className="w-12 h-12 md:hidden block rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
-                        <h2 className="post-category text-sm text-second-font hover:underline cursor-pointer">Photography</h2>
+                    <Image width={48} height={48} alt="profile image" src={ProfileImg.src} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer md:hidden" />
+                        <h2 className="post-category text-sm text-second-font hover:underline cursor-pointer ">Photography</h2>
                     </div>
                     <p className="post-added text-third-font text-xs m-0">1 hour ago</p>
                 </div>
 
-                <div className="post-img">
-                    <img alt="profile image"  src={ProfileImg.src} className="w-full h-96 object-cover"/>
+                <div className="post-img" style={{width: '100%', height: '24rem', position: 'relative'}}>
+                    <Image alt="Post image" priority layout="fill" objectFit="cover" src={ProfileImg.src} />
                 </div>
 
                 <div className="post-title p-4 text-second-font">

@@ -1,3 +1,4 @@
+import { Session } from "next-auth"
 import Link from "next/link"
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai"
 import ResponsiveSection from "../Layout/Responsive"
@@ -71,3 +72,4 @@ const Blog:React.FC<BlogProps> = () => {
 }
 
 export default Blog
+

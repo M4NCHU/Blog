@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 import Logo from "../../resources/img/logo/diamond.png"
 import FooterIcon from "./FooterIcon"
 import FooterLink from "./FooterLink"

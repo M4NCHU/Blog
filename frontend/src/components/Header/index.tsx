@@ -6,17 +6,23 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import HeaderButton from "./Button";
 import IconButton from "./Icon";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
 import { Session } from "next-auth";
-import DropDownMenu from "./DropDownMenu/DropDownMenu";
+// import DropDownMenu from "./DropDownMenu/DropDownMenu";
 import { useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import { useSession } from "next-auth/react";
 
 interface HeaderProps {
     session: Session | null
 }
 
 const Header:React.FC<HeaderProps> = ({session}) => {
+    const {data:user} = useSession()
     
+
+    const DropDownMenu = dynamic(()=>import("./DropDownMenu/DropDownMenu"))
+    
+
     const [isOpen, setIsOpen] = useState<boolean>(false)
     // create ref to dropdown element
     const DropdownRef = useRef<HTMLDivElement>(null)
@@ -79,8 +85,8 @@ const Header:React.FC<HeaderProps> = ({session}) => {
                     ) : (
                         <>
                         <div className="drop-down-menu relative" ref={DropdownRef}  >
-                            <Image src={Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px] cursor-pointer" onClick={(e)=>handleOpenDropdown(isOpen)}/>
-                            <DropDownMenu isOpen={isOpen}/>
+                            <Image src={user?.user.image ? user?.user.image as string : Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px] cursor-pointer rounded-full" onClick={(e)=>handleOpenDropdown(isOpen)}/>
+                            <DropDownMenu isOpen={isOpen} session={session}/>
                             {/* <HeaderButton text="login" icon={<BiLogIn/>} onClick={()=>signOut()}/> */}
                         </div>
                         </>

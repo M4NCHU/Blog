@@ -1,5 +1,3 @@
-import { useState } from "react"
-import DropDownBtn from "./DropDownBtn"
 import DropDownLink from "./DropDownLink"
 import { signOut } from "next-auth/react";
 import { BsFillTriangleFill } from "react-icons/bs";
@@ -7,18 +5,19 @@ import DropdownLi from "./DropdownLi";
 import Link from "next/link";
 import ProfileImg from "../../../resources/categories-img/photo-1575936123452-b67c3203c357.jpeg"
 import Image from "next/image";
+import { Session } from "next-auth";
+
+
 
 
 interface DropDownMenuProps {
     isOpen: boolean
-
+    session: Session
 }
 
+const DropDownMenu:React.FC<DropDownMenuProps> = ({isOpen, session}) => {
+    const {user:{name, image, username}} = session
 
-
-
-const DropDownMenu:React.FC<DropDownMenuProps> = ({isOpen}) => {
-    
     return (
 <>
         {isOpen && (
@@ -26,10 +25,13 @@ const DropDownMenu:React.FC<DropDownMenuProps> = ({isOpen}) => {
                 <ul className="dropdown-list bg-forth-bg shadow-lg flex flex-col px-2 py-2 border-third-bg rounded-lg relative gap-2">
                     <BsFillTriangleFill className="absolute -top-3 right-1 text-forth-bg shadow-lg"/>
                     <DropdownLi>
+                    
                         <Link href="/profile" className="px-4  py-2 w-full rounded-lg flex flex-row justify-center items-center hover:bg-third-bg gap-4" >
-                            <Image width="12" height="12" alt="profile image" src={ProfileImg.src} className="w-8 h-8 rounded-full opacity-90 hover:opacity-100 cursor-pointer" />
+                            <div style={{width: '2rem', height: '2rem', position: 'relative'}}>
+                                <Image fill alt="profile image" src={image as string} className="w-8 h-8 rounded-full opacity-90 hover:opacity-100 cursor-pointer" />
+                            </div>
                             <p className="m-0">
-                                Maciej Szwast
+                                {username ? username : name}
                             </p>
                         </Link>
                     </DropdownLi>

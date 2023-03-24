@@ -1,10 +1,10 @@
 
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import useDropdownMenu from "@/util/useDropdownMenu";
-import DropDownMenuElement from "../Dropdown/DropDownMenu";
 import DropdownLiElement from "../Dropdown/DropdownLi";
 import DropDownLinkElement from "../Dropdown/DropDownLink";
 import { AiFillSetting, AiOutlineLike } from "react-icons/ai";
+import dynamic from "next/dynamic";
 
 
 interface ProfileProps {
@@ -15,7 +15,10 @@ const ProfileDropdown:React.FC<ProfileProps> = () => {
     const { isOpen, handleToggle, dropdownRef, buttonText, buttonIcon } = useDropdownMenu({
         buttonIcon: <BiDotsHorizontalRounded/>,
       });
-    
+
+      const DropDownMenuElement = dynamic(()=>import("../Dropdown/DropDownMenu"), {
+        loading: () => <div>Loading...</div>,
+      })
     
     return (
         <>
@@ -27,7 +30,7 @@ const ProfileDropdown:React.FC<ProfileProps> = () => {
                             
             <DropDownMenuElement isOpen={isOpen}>
                 <DropdownLiElement>
-                    <DropDownLinkElement text="Settings" link="/profile" linkIcon={<AiFillSetting/>}/>
+                    <DropDownLinkElement text="Settings" link="/profile/settings" linkIcon={<AiFillSetting/>}/>
                 </DropdownLiElement>
                 <DropdownLiElement>
                     <DropDownLinkElement text="liked" link="/profile" linkIcon={<AiOutlineLike/>}/>

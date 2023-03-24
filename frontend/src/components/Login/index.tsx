@@ -1,13 +1,15 @@
 import Link from "next/link"
 import DefaultHeader from "../Layout/DefaultHeader"
 import ResponsiveSection from "../Layout/Responsive"
-import LoginInput from "./Input"
+// import LoginInput from "./Input"
 import { FcGoogle } from "react-icons/fc";
 import { getSession, signIn, useSession } from "next-auth/react";
-import Home from "@/pages";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { NextPageContext } from "next";
+// import Home from "@/pages";
+// import { useRouter } from "next/router";
+// import { useEffect } from "react";
+// import { NextPageContext } from "next";
+import dynamic from "next/dynamic";
+// import LoginButton from "./Button";
 
 
 
@@ -17,7 +19,10 @@ interface LoginProps {
 
 const LoginPage:React.FC<LoginProps> = () => {
 
-    
+    const LoginInput = dynamic(()=>import("./Input"))
+    const LoginButton = dynamic(()=>import("./Button"), {
+        loading: () => <div>Loading...</div>,
+      })
 
     return (
         <>
@@ -44,10 +49,10 @@ const LoginPage:React.FC<LoginProps> = () => {
 
                     <p className="m-0 text-third-font">Or</p>
 
-                    <button onClick={()=>signIn("google")} className="text-primary-font bg-second-bg hover:bg-third-bg focus:ring-2 focus:ring-third-bg font-medium rounded-lg text-sm px-4 lg:px-5 py-2.5 mr-2 focus:outline-none flex flex-row justify-center items-center gap-2 w-full">
+                    <LoginButton onClick={()=>signIn("google")}>
                         <FcGoogle/>
                         Login with Google
-                    </button>
+                    </LoginButton>
                     
                     <div className="flex flex-row justify-between items-center gap-4">
                         <p className="m-0 text-third-font">Don't have an account?</p>

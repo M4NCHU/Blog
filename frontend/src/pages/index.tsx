@@ -7,8 +7,15 @@ import React from 'react'
 import Blog from '@/components/Blog'
 import { NextPageContext } from 'next'
 import { getSession, useSession } from 'next-auth/react'
+import dynamic from 'next/dynamic'
+import { Session } from 'next-auth'
+
 
 const inter = Inter({ subsets: ['latin'] })
+
+interface ProfileProps {
+  session?: Session;
+}
 
 export default function Home(page: React.ReactElement) {
 
@@ -32,8 +39,8 @@ export default function Home(page: React.ReactElement) {
       </Head>
       
       <MainLayout>
-        <Categories/>
-        <Blog/>
+        {/* <Categories/> */}
+        <Blog />
       </MainLayout>
       
 

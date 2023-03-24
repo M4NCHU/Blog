@@ -1,4 +1,4 @@
-import { AiOutlineArrowRight, AiOutlineArrowUp, AiOutlineComment, AiOutlineShareAlt } from "react-icons/ai"
+import { AiOutlineArrowUp, AiOutlineComment } from "react-icons/ai"
 import ProfileImg from "../../../resources/categories-img/photo-1575936123452-b67c3203c357.jpeg"
 
 interface ShowcaseItemProps {

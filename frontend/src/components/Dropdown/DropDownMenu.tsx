@@ -1,13 +1,3 @@
-import { useState } from "react"
-import DropDownLink from "./DropDownLink"
-import { signOut } from "next-auth/react";
-import { BsFillTriangleFill } from "react-icons/bs";
-import DropdownLi from "./DropdownLi";
-import Link from "next/link";
-import ProfileImg from "../../../resources/categories-img/photo-1575936123452-b67c3203c357.jpeg"
-import Image from "next/image";
-
-
 interface DropDownMenuElementProps {
     isOpen: boolean,
     children: React.ReactNode,

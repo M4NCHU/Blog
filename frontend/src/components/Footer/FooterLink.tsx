@@ -1,6 +1,4 @@
-import Image from "next/image"
 import Link from "next/link"
-import Logo from "../../resources/img/logo/diamond.png"
 
 interface FooterLinkProps {
     site: string

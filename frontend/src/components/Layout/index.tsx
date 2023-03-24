@@ -1,5 +1,4 @@
 import { useSession } from "next-auth/react";
-import Categories from "../Categories";
 import Footer from "../Footer";
 import Header from "../Header";
 

@@ -1,5 +1,6 @@
 import userTypeDefs from "./user";
+import postTypeDefs from "./post"
 
-const typeDefs = [userTypeDefs];
+const typeDefs = [userTypeDefs, postTypeDefs];
 
 export default typeDefs;

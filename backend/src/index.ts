@@ -50,7 +50,6 @@ app.use(
   expressMiddleware(server, {
     context: async function ({ req, res }): Promise<GraphQlContext> {
       const session = await getSession({ req }) as Session;
-      console.log(session);
       return { session, prisma };
     },
   }),

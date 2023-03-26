@@ -1,19 +1,35 @@
+import { useLazyQuery, useQuery } from "@apollo/client"
 import { Session } from "next-auth"
 import Link from "next/link"
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai"
 import ResponsiveSection from "../Layout/Responsive"
+import CreatePost from "./CreatePost"
 import Post from "./post"
 import Trending from "./trending"
+import postOperations from "../../graphql/operations/post"
+import { CreatePostArguments } from "../../../../backend/src/util/types"
+import {  PostsData } from "@/util/types"
+import { read } from "fs"
+import { useEffect, useState } from "react"
 
 interface BlogProps {
     
 }
 
 const Blog:React.FC<BlogProps> = () => {
+
+    const {data, loading, error} = useQuery<PostsData, null>(postOperations.Query.readPosts)
+    console.log("data", data)
+    
+    
+    
     return (
-        
-        <ResponsiveSection addClass="blog flex flex-col md:flex-row">
-            <div className="blog-posts flex-col  md:w-2/3 mt-6">
+        <>
+        <ResponsiveSection addClass="blog">
+            <div className="blog-posts flex-col w-full  md:w-2/3 mt-6">
+            <CreatePost/>
+                
+                
                 <div className="blog-header flex flex-row justify-start items-center">
                     <h1 className="text-lg text-third-font uppercase">Post list</h1>
                     <div className="text-third-font text-base ml-8 flex flex-row gap-5 flex-wrap">
@@ -30,10 +46,9 @@ const Blog:React.FC<BlogProps> = () => {
                     
                 </div>
                 <div className="post-section flex flex-col gap-8 mt-4 xd:pr-12">
-                    <Post />
-                    <Post />
-                    <Post />
-                    <Post />
+                    {data?.readPosts && <Post content={data.readPosts}/>}
+                
+                
                 </div>
 
                 <div className="blog-pagination flex flex-row justify-center mt-8 gap-4">
@@ -68,6 +83,8 @@ const Blog:React.FC<BlogProps> = () => {
                 
             </div>
         </ResponsiveSection>
+        </>
+        
     )
 }
 

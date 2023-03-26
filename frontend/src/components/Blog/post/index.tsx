@@ -2,16 +2,22 @@ import ProfileImg from "../../../resources/categories-img/photo-1575936123452-b6
 import {AiOutlineArrowUp,AiOutlineComment, AiOutlineShareAlt,AiOutlineArrowRight} from "react-icons/ai"
 import Link from "next/link"
 import Image from 'next/legacy/image'
+import { getSession, useSession } from "next-auth/react"
+import { User } from "@prisma/client"
+import { Post } from "@/util/types"
 
 interface PostProps {
-    
+    content: Array<Post>
 }
 
-const Post:React.FC<PostProps> = ({}) => {
+const Post:React.FC<PostProps> = ({content}) => {
     
-    console.log(ProfileImg)
+    console.log("content", content, "siema")
     return (
-        <div className="blog-post flex flex-row mt-4 mr-2 md:pr-4 tablet:pr-16 ">
+        content.map(post => (
+            
+            <div key={post.id} className="blog-post flex flex-row mt-4 mr-2 md:pr-4 tablet:pr-16 ">
+                
             <div className="post-sidebar hidden md:block">
                 <div className="post-author">
                     <Image width={48} height={48} alt="profile image" src={ProfileImg.src} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
@@ -36,17 +42,20 @@ const Post:React.FC<PostProps> = ({}) => {
                 <div className="post-img" style={{width: '100%', height: '24rem', position: 'relative'}}>
                     <Image alt="Post image" priority layout="fill" objectFit="cover" src={ProfileImg.src} />
                 </div>
-
-                <div className="post-title p-4 text-second-font">
+                {post.title && (
+                    <div className="post-title p-4 text-second-font">
                     <h1 className="post-t text-lg hover:underline">
                         <Link href="/">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, corporis!
+                             {post.title}
+                             
                         </Link> 
                     </h1>
                 </div>
+                )}
+                
 
                 <div className="post-content px-4 text-third-font">
-                    <p className="post-c">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa voluptates impedit reiciendis optio iusto exercitationem repellendus iste minima magni ex.</p>
+                    <p className="post-c">{post.desc}</p>
                 </div>
 
                 <div className="post-actions p-4 flex flex-row justify-between text-third-font flex-wrap">
@@ -71,6 +80,8 @@ const Post:React.FC<PostProps> = ({}) => {
                 </div>
             </div>
         </div>
+        ))
+        
     )
 }
 

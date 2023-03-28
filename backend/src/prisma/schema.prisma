@@ -61,16 +61,17 @@ model VerificationToken {
 }
 
 model Post {
-    id        String   @id @default(auto()) @map("_id") @db.ObjectId
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    published Boolean  @default(false)
+    id        String    @id @default(auto()) @map("_id") @db.ObjectId
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    published Boolean   @default(false)
     title     String
     desc      String
-    author    User?    @relation(fields: [authorId], references: [id])
+    author    User?     @relation(fields: [authorId], references: [id])
     authorId  String
+    image     String?
     // comments  Comment[]
-    // tags      Tag[]
+    tags      PostTag[]
     // Like      Like[]
 }
 
@@ -95,11 +96,21 @@ model Post {
 //     @@unique([userId, postId])
 // }
 
-// model Tag {
-//     id    Int    @id @default(auto()) @map("_id") @db.ObjectId
-//     name  String
-//     posts Post[] @relation(references: [id])
-// }
+model Tag {
+    id      String    @id @default(auto()) @map("_id") @db.ObjectId
+    tagName String    @unique
+    posts   PostTag[]
+}
+
+model PostTag {
+    id     String @id @default(auto()) @map("_id") @db.ObjectId
+    post   Post?  @relation(fields: [postId], references: [id])
+    postId String
+    tag    Tag?   @relation(fields: [tagId], references: [id])
+    tagId  String
+
+    @@unique([postId, tagId])
+}
 
 enum Role {
     USER

@@ -36,12 +36,27 @@ export interface CreateUsernameResponse {
  */
 
 export interface CreatePostArguments { 
-    id: string,
+    id: string
     authorId: string
     title: string
     desc: string
     
 }
+
+/**
+ * Tags
+ */
+
+export interface CreateTagArguments {
+    id: string
+    tagName: string
+}
+
+/**
+ * Payloads
+ */
+
+
 
 export interface PostSentSubscriptionPayload {
     postSent: PostPopulated

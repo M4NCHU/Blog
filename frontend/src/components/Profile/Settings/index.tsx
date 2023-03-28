@@ -10,6 +10,7 @@ import {MdDriveFileRenameOutline} from "react-icons/md"
 import {BsFillSunFill} from "react-icons/bs"
 import {RiLockPasswordLine} from "react-icons/ri"
 import {AiOutlineNotification} from "react-icons/ai"
+import CreateTag from "./CreateTag";
 
 
 
@@ -31,7 +32,7 @@ const ProfileSettings:React.FC<ProfileSettingsProps> = () => {
         },
         {
           label: "Page theme",
-          content: <p>Content of Tab 2</p>,
+          content: <CreateTag/>,
           icon: <BsFillSunFill/>,
         },
         {

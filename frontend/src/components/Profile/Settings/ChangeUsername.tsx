@@ -18,7 +18,7 @@ interface ChangeUsernameProps {
 const ChangeUsername:React.FC<ChangeUsernameProps> = () => {
     const {data: session} = useSession();
     
-    const [username, setUsername] = useState(session?.user.username);
+    const [username, setUsername] = useState(session?.user.username ? session?.user.username : "");
     const [createUsername, {loading,error}] = useMutation<CreateUsernameData, CreateUsernameVariables>(userOperations.Mutations.createUsername)
     const disabledBtn = loading || username === session?.user.username || username === ""
 
@@ -26,7 +26,7 @@ const ChangeUsername:React.FC<ChangeUsernameProps> = () => {
 
     if (!username) return
     if (username === session?.user.username) return
-
+        
     try {
         const {data} = await createUsername({variables: {username}})
 
@@ -37,7 +37,7 @@ const ChangeUsername:React.FC<ChangeUsernameProps> = () => {
         if (username.length < 4) {
             throw new Error("Username length should be at least 4 characters");
         }
-
+        
         
 
         if (data.createUsername.error) {
@@ -46,6 +46,7 @@ const ChangeUsername:React.FC<ChangeUsernameProps> = () => {
             } = data
             throw new Error(error)
         }
+        
         toast.success('Username successfully changed!')
         reloadSession();
         

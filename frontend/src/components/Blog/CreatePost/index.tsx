@@ -31,8 +31,6 @@ const CreatePost:React.FC<CreatePostProps> = () => {
         if (!post) return
         if (!user) return
 
-        const img = user?.image
-
         const authorId = user.id
         
       
@@ -47,7 +45,6 @@ const CreatePost:React.FC<CreatePostProps> = () => {
                 desc: post,
                 title,
                 authorId,
-                
             }})
 
             if (!data?.sendPost) {

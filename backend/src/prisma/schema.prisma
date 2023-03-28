@@ -42,7 +42,7 @@ model User {
     username      String?   @unique
     emailVerified DateTime?
     image         String?
-    createdAt     DateTime  @default(now())
+    // createdAt     DateTime  @default(now())
     accounts      Account[]
     sessions      Session[]
     // role          Role      @default(USER)

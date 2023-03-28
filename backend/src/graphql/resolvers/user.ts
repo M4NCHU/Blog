@@ -6,7 +6,11 @@ const resolvers = {
         searchUsers: ()=>{},
     },
     Mutation:{
-        createUsername: async (_:any, args: {username:string}, context:GraphQlContext):Promise<CreateUsernameResponse>=>{
+        createUsername: async (
+            _:any,
+            args: {username:string},
+            context:GraphQlContext
+            ) : Promise<CreateUsernameResponse>=>{
             const {username} = args
             const {session, prisma} = context
             
@@ -16,14 +20,16 @@ const resolvers = {
 
             
             const {id: userId} = session.user
-
+            
             try {
+               
                 // Check if username is not already taken
                 const existUser = await prisma.user.findUnique({
                     where: {
                         username,
                     }
                 })
+                
 
                 if (existUser) {
                     return {
@@ -42,9 +48,8 @@ const resolvers = {
 
                 return {success: true}
             } catch (error:any) {
-                return {
-                    error: error?.message
-                }
+                
+                return error?.message
             }
         },
     },

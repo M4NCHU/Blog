@@ -6,7 +6,7 @@ const typeDefs = gql`
         author: User
         title: String
         desc: String
-        # image: String
+        
     }
 
     type Query {
@@ -19,7 +19,7 @@ const typeDefs = gql`
             authorId: String
             title: String
             desc: String
-            # image: String
+            
         ): Boolean
     }
 `

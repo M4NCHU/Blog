@@ -40,7 +40,7 @@ export interface CreatePostArguments {
     authorId: string
     title: string
     desc: string
-    // image: string
+    
 }
 
 export interface PostSentSubscriptionPayload {

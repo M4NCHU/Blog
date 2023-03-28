@@ -15,7 +15,6 @@ export interface Post {
     author: string;
     title: string;
     desc: string;
-    // image: string;
   };
   
 export interface PostsData  {

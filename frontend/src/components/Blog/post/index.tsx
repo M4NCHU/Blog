@@ -19,8 +19,12 @@ const Post:React.FC<PostProps> = ({content}) => {
             <div key={post.id} className="blog-post flex flex-row mt-4 mr-2 md:pr-4 tablet:pr-16 ">
                 
             <div className="post-sidebar hidden md:block">
-                <div className="post-author">
-                    <Image width={48} height={48} alt="profile image" src={ProfileImg.src} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
+                <div className="post-author hidden md:block relative group">
+                
+                    <Image width={48} height={48} alt="profile image" src={post.author.image as string} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
+                    <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-forth-bg text-primary-font text-sm rounded-lg shadow-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 py-1 px-3 min-w-max">
+                        {post.author.username ? post.author.username : post.author.name}
+                    </div>
                 </div>
                 <div className="post-reactions flex justify-center items-center border border-second-bg hover:bg-second-bg cursor-pointer w-12 h-12 my-2 rounded-lg text-third-font">
                     <div className="">
@@ -33,7 +37,10 @@ const Post:React.FC<PostProps> = ({content}) => {
             <div className="post-content bg-second-bg w-full ml-2 md:ml-8 rounded-lg">
                 <div className="post-header p-4 flex justify-between items-center">
                     <div className="flex flex-row gap-4 justify-center items-center">
-                    <Image width={48} height={48} alt="profile image" src={ProfileImg.src} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer md:hidden" />
+                        <div className="block md:hidden">
+                            <Image width={48} height={48} alt="profile image" src={post.author.image as string} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer " />        
+                        </div>
+                    
                         <h2 className="post-category text-sm text-second-font hover:underline cursor-pointer ">Photography</h2>
                     </div>
                     <p className="post-added text-third-font text-xs m-0">1 hour ago</p>
@@ -47,6 +54,7 @@ const Post:React.FC<PostProps> = ({content}) => {
                     <h1 className="post-t text-lg hover:underline">
                         <Link href="/">
                              {post.title}
+                             
                              
                         </Link> 
                     </h1>

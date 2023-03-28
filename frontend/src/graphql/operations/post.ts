@@ -5,6 +5,8 @@ export const postFields  =`
     author {
         id
         username
+        name
+        image
     }
     title
     desc
@@ -27,14 +29,14 @@ export default {
                 $authorId:String!,
                 $title: String,
                 $desc: String!
-                # $image: String
+                
                 ) {
                 sendPost(
                 id: $id,
                 authorId: $authorId,
                 title: $title,
                 desc: $desc
-                # image: $image
+                
                 ) 
             }
         `

@@ -13,14 +13,9 @@ const resolvers = {
             
 
             try {
-                const posts = await prisma.post.findMany(
-                    {
-                        include: postPopulated,
-                        orderBy: {
-                            createdAt: "desc"
-                        }
-                    }
-                )
+                const posts = await prisma.post.findMany({
+                    include: postPopulated
+                })
                 return posts
             } catch (error:any) {
                 throw new Error(error?.message)
@@ -67,7 +62,9 @@ export const postPopulated = Prisma.validator<Prisma.PostInclude> () ({
     author: {
         select: {
             id: true,
-            username:true
+            username:true,
+            name: true,
+            image: true,
         }
     }
 })

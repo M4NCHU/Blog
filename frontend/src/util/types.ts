@@ -18,6 +18,9 @@ export interface Post {
     author: string;
     title: string;
     desc: string;
+    image: string
+    updatedAt: Date
+    createdAt: Date
 };
 
 
@@ -31,6 +34,11 @@ export interface PostsData  {
  * Tags
  */
 
+export interface Tag {
+    id: string
+    tagName: string
+}
+
 export interface CreateTagArguments {
     createTag: {
         id: string
@@ -42,4 +50,8 @@ export interface CreateTagArguments {
 export interface CreateTagVariables {
     id: string
     tagName: string
+}
+
+export interface TagData {
+    readTags: Array<Tag>
 }

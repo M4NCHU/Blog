@@ -21,8 +21,6 @@ export default function Home(page: React.ReactElement) {
 
   const { data: session } = useSession();
 
-  console.log(session)
-
   // odświeżanie sesji
   const reloadSession = () => {
     const event = new Event("visibilitychange")

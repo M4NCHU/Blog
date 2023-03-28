@@ -52,10 +52,11 @@ const CreatePost:React.FC<CreatePostProps> = () => {
             }
 
             toast.success('Post added successfully!')
-            reloadSession();
-
+            
             setPost("")
             setTitle("")
+            
+            reloadSession();
         } catch (error:any) {
             toast.error(error?.message)
         }

@@ -1,7 +1,20 @@
 import {gql} from "@apollo/client"
 
+export const tagFields = `
+    id
+    tagName
+`
+
 export default {
-    Query: {},
+    Query: {
+        readTags: gql`
+            query ReadTags {
+                readTags {
+                    ${tagFields}
+                }
+            }
+        `
+    },
     Mutation: {
         createTag: gql`
             mutation CreateTag (

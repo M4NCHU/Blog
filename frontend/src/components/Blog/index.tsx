@@ -1,5 +1,4 @@
-import { useLazyQuery, useQuery } from "@apollo/client"
-import { Session } from "next-auth"
+
 import Link from "next/link"
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai"
 import ResponsiveSection from "../Layout/Responsive"
@@ -7,10 +6,8 @@ import CreatePost from "./CreatePost"
 import Post from "./post"
 import Trending from "./trending"
 import postOperations from "../../graphql/operations/post"
-import { CreatePostArguments } from "../../../../backend/src/util/types"
 import {  PostsData } from "@/util/types"
-import { read } from "fs"
-import { useEffect, useState } from "react"
+import { useQuery } from "@apollo/client"
 
 interface BlogProps {
     
@@ -19,7 +16,6 @@ interface BlogProps {
 const Blog:React.FC<BlogProps> = () => {
 
     const {data, loading, error} = useQuery<PostsData, null>(postOperations.Query.readPosts)
-    console.log("data", data)
     
     
     

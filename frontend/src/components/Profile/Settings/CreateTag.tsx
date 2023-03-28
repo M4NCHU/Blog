@@ -73,7 +73,7 @@ const CreateTag:React.FC<CreateTagProps> = () => {
                 
                 <input placeholder="Create tag" className="Header-input text-primary-font bg-third-bg focus:ring-2 focus:ring-third-bg font-medium rounded-lg text-sm pl-10 pr-2 py-2.5 focus:outline-none mb-2" value={tagName} onChange={(e)=>setTag(e.target.value)}/>
 
-                <Button variant="warning" size="small" disabled={disabledBtn} onClick={onSubmit} loading={loading} >
+                <Button variant="warning" size="small" disabled={disabledBtn} onClick={onSubmit} loading={loading} type="submit">
                     Save
                 </Button>
 

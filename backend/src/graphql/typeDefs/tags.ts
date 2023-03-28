@@ -6,6 +6,14 @@ const typeDefs = gql`
         tagName: String
     }
 
+
+    # Queries 
+
+    type Query {
+        readTags: [Tag]
+    }
+
+    # Mutations 
     type Mutation {
         createTag(
             id: String

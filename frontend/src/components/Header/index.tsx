@@ -1,8 +1,8 @@
 import Logo from "../../resources/img/logo/diamond.png"
 import Image from 'next/image'
 import { BsSun,  BsBookmarks} from 'react-icons/bs';
-import { BiLogIn } from 'react-icons/bi';
-import { AiOutlineSearch } from 'react-icons/ai';
+import { BiDotsHorizontalRounded, BiLogIn } from 'react-icons/bi';
+import { AiFillSetting, AiOutlineLike, AiOutlineSearch } from 'react-icons/ai';
 import HeaderButton from "./Button";
 import IconButton from "./Icon";
 import Link from "next/link";
@@ -10,37 +10,68 @@ import { Session } from "next-auth";
 // import DropDownMenu from "./DropDownMenu/DropDownMenu";
 import { useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import DropDownMenuElement from "../Dropdown/DropDownMenu";
+import DropdownLiElement from "../Dropdown/DropdownLi";
+import DropDownLinkElement from "../Dropdown/DropDownLink";
+import useDropdownMenu from "@/util/useDropdownMenu";
+import Button from "../Button";
 
 interface HeaderProps {
     session: Session | null
+}
+
+interface MenuItem {
+  id: number;
+  label: string;
+  url: string;
+}
+
+interface Menu {
+  menuItems: MenuItem[];
 }
 
 const Header:React.FC<HeaderProps> = ({session}) => {
     const {data:user} = useSession()
     
 
-    const DropDownMenu = dynamic(()=>import("./DropDownMenu/DropDownMenu"))
-    
+    const { isOpen, handleToggle, dropdownRef, buttonText, buttonIcon } = useDropdownMenu({
+        buttonIcon: <BiDotsHorizontalRounded/>,
+      });
 
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    // create ref to dropdown element
-    const DropdownRef = useRef<HTMLDivElement>(null)
+      const DropDownMenuElement = dynamic(()=>import("../Dropdown/DropDownMenu"), {
+        loading: () => <div>Loading...</div>,
+      })
 
-    // Handle open dropdown
-    const handleOpenDropdown = (state:boolean) => {
-        setIsOpen(!state)
-    }
-
-    const handleClickOutsideDropdown = (e:any) => {
-        if (isOpen && !DropdownRef?.current?.contains(e.target as Node)) {
-            setIsOpen(false)
-        }
-    }
-
-    if (typeof window !== 'undefined') {
-    window.addEventListener("click",handleClickOutsideDropdown)
-    }
+      const [menu, setMenu] = useState<Menu>({
+        menuItems: [
+          {
+            id: 1,
+            label: 'Profile',
+            url: '/profile',
+          },
+          {
+            id: 2,
+            label: 'About Us',
+            url: '/about',
+          },
+          {
+            id: 3,
+            label: 'Services',
+            url: '/services',
+          },
+          {
+            id: 4,
+            label: 'Blog',
+            url: '/blog',
+          },
+          {
+            id: 5,
+            label: 'Contact Us',
+            url: '/contact',
+          },
+        ],
+      });
 
     return (
         
@@ -84,9 +115,24 @@ const Header:React.FC<HeaderProps> = ({session}) => {
                         </Link>
                     ) : (
                         <>
-                        <div className="drop-down-menu relative" ref={DropdownRef}  >
-                            <Image src={user?.user.image ? user?.user.image as string : Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px] cursor-pointer rounded-full" onClick={(e)=>handleOpenDropdown(isOpen)}/>
-                            <DropDownMenu isOpen={isOpen} session={session}/>
+                        <div className="drop-down-menu relative" ref={dropdownRef}  >
+                            <Image src={user?.user.image ? user?.user.image as string : Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px] cursor-pointer rounded-full" onClick={handleToggle}/>
+
+                            <DropDownMenuElement isOpen={isOpen}>
+                            {menu.menuItems.map((menuItem) => (
+                                <DropdownLiElement key={menuItem.id}>
+                                    <DropDownLinkElement text={menuItem.label} link={menuItem.url} />
+                                </DropdownLiElement>
+                            ))}
+                                
+                                <DropdownLiElement>
+                                    <Button variant="warning" size="small" addClass="w-full" onClick={signOut}>
+                                        logout
+                                    </Button>
+                                </DropdownLiElement>
+                            </DropDownMenuElement>
+
+                            {/* <DropDownMenu isOpen={isOpen} session={session}/> */}
                             {/* <HeaderButton text="login" icon={<BiLogIn/>} onClick={()=>signOut()}/> */}
                         </div>
                         </>

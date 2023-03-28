@@ -2,9 +2,17 @@ import ProfileImg from "../../../resources/categories-img/photo-1575936123452-b6
 import {AiOutlineArrowUp,AiOutlineComment, AiOutlineShareAlt,AiOutlineArrowRight} from "react-icons/ai"
 import Link from "next/link"
 import Image from 'next/legacy/image'
-import { getSession, useSession } from "next-auth/react"
-import { User } from "@prisma/client"
 import { Post } from "@/util/types"
+import { formatRelative } from "date-fns"
+import { enUS } from "date-fns/locale"
+
+
+const formatRelativeLocale = {
+    lastWeek: "eeee",
+    yesterday: "'Yesterday",
+    today: "p",
+    other: "MM/dd/yy",
+  };
 
 interface PostProps {
     content: Array<Post>
@@ -12,9 +20,10 @@ interface PostProps {
 
 const Post:React.FC<PostProps> = ({content}) => {
     
-    console.log("content", content, "siema")
+    const sortedPosts = [...content].sort((a,b) => b.updatedAt.valueOf()-a.updatedAt.valueOf()) 
+    
     return (
-        content.map(post => (
+        sortedPosts.map(post => (
             
             <div key={post.id} className="blog-post flex flex-row mt-4 mr-2 md:pr-4 tablet:pr-16 ">
                 
@@ -34,21 +43,36 @@ const Post:React.FC<PostProps> = ({content}) => {
                 </div>
             </div>
 
-            <div className="post-content bg-second-bg w-full ml-2 md:ml-8 rounded-lg">
+            <div className="post-content bg-second-bg hover:bg-forth-bg w-full ml-2 md:ml-8 rounded-lg cursor-pointer">
                 <div className="post-header p-4 flex justify-between items-center">
                     <div className="flex flex-row gap-4 justify-center items-center">
+                        
                         <div className="block md:hidden">
                             <Image width={48} height={48} alt="profile image" src={post.author.image as string} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer " />        
                         </div>
                     
                         <h2 className="post-category text-sm text-second-font hover:underline cursor-pointer ">Photography</h2>
                     </div>
-                    <p className="post-added text-third-font text-xs m-0">1 hour ago</p>
+                    
+                    <p className="post-added text-third-font text-xs m-0">
+                        
+                    {formatRelative(new Date(post.updatedAt), new Date(), {
+                        locale: {
+                        ...enUS,
+                        formatRelative: (token) =>
+                            formatRelativeLocale[
+                            token as keyof typeof formatRelativeLocale
+                            ],
+                        },
+                    })}
+                    </p>
                 </div>
-
-                <div className="post-img" style={{width: '100%', height: '24rem', position: 'relative'}}>
-                    <Image alt="Post image" priority layout="fill" objectFit="cover" src={ProfileImg.src} />
-                </div>
+                {post.image && (
+                    <div className="post-img" style={{width: '100%', height: '24rem', position: 'relative'}}>
+                         <Image alt="Post image" priority layout="fill" objectFit="cover" src={ProfileImg.src} />
+                     </div>   
+                )}
+                
                 {post.title && (
                     <div className="post-title p-4 text-second-font">
                     <h1 className="post-t text-lg hover:underline">
@@ -66,7 +90,7 @@ const Post:React.FC<PostProps> = ({content}) => {
                     <p className="post-c">{post.desc}</p>
                 </div>
 
-                <div className="post-actions p-4 flex flex-row justify-between text-third-font flex-wrap">
+                <div className="post-actions px-4 py-2 flex flex-row justify-between text-third-font flex-wrap">
                     <div className="flex flex-row gap-4">
                         <div className="post-action flex flex-row justify-center items-center gap-2 hover:bg-third-bg p-2 rounded-lg cursor-pointer">
                             <AiOutlineComment/>

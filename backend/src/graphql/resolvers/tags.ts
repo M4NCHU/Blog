@@ -1,8 +1,28 @@
+import { Tag } from "@prisma/client";
 import { GraphQLError, GraphQLString } from "graphql";
 import { CreateTagArguments, GraphQlContext } from "../../util/types";
 
 const resolvers = {
-    Query: {},
+    Query: {
+        readTags: async (
+            _ : any,
+            __: any,
+            context: GraphQlContext
+        ) : Promise<Array<Tag>> => {
+            const {prisma} = context
+            console.log("xd")
+            try {
+                const tags = await prisma.tag.findMany()
+                
+                return tags
+            } catch (error:any) {
+                throw new Error(error?.message)
+            }
+
+           
+        }
+            
+    },
     Mutation: {
         createTag: async (
             _ : any,

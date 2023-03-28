@@ -10,6 +10,9 @@ export const postFields  =`
     }
     title
     desc
+    image
+    createdAt
+    updatedAt
 `
 
 export default {

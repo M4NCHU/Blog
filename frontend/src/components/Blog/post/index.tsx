@@ -30,17 +30,17 @@ const Post:React.FC<PostProps> = ({content}) => {
             <div className="post-sidebar hidden md:block">
                 <div className="post-author hidden md:block relative group">
                 
-                    <Image width={48} height={48} alt="profile image" src={post.author.image as string} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
+                    <Image width={48} height={48} alt={`Photo of author: ${post.author.username}`} src={post.author.image as string} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
                     <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-forth-bg text-primary-font text-sm rounded-lg shadow-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 py-1 px-3 min-w-max">
                         {post.author.username ? post.author.username : post.author.name}
                     </div>
                 </div>
-                <div className="post-reactions flex justify-center items-center border border-second-bg hover:bg-second-bg cursor-pointer w-12 h-12 my-2 rounded-lg text-third-font">
+                <button className="post-reactions flex justify-center items-center border border-second-bg hover:bg-second-bg cursor-pointer w-12 h-12 my-2 rounded-lg text-third-font">
                     <div className="">
                         <AiOutlineArrowUp/>
                         <p className="m-0">15</p>
                     </div>
-                </div>
+                </button>
             </div>
 
             <div className="post-content bg-second-bg hover:bg-forth-bg w-full ml-2 md:ml-8 rounded-lg cursor-pointer">
@@ -48,7 +48,7 @@ const Post:React.FC<PostProps> = ({content}) => {
                     <div className="flex flex-row gap-4 justify-center items-center">
                         
                         <div className="block md:hidden">
-                            <Image width={48} height={48} alt="profile image" src={post.author.image as string} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer " />        
+                            <Image width={48} height={48} alt={`Photo of author: ${post.author.username}`} src={post.author.image as string} priority className="w-12 h-12 object-cover rounded-lg opacity-90 hover:opacity-100 cursor-pointer " />        
                         </div>
                     
                         <h2 className="post-category text-sm text-second-font hover:underline cursor-pointer ">Photography</h2>
@@ -69,7 +69,7 @@ const Post:React.FC<PostProps> = ({content}) => {
                 </div>
                 {post.image && (
                     <div className="post-img" style={{width: '100%', height: '24rem', position: 'relative'}}>
-                         <Image alt="Post image" priority layout="fill" objectFit="cover" src={ProfileImg.src} />
+                         <Image alt={`image of post:${post.title ? post.title: post.desc}`} priority layout="fill" objectFit="cover" src={ProfileImg.src} />
                      </div>   
                 )}
                 
@@ -92,23 +92,23 @@ const Post:React.FC<PostProps> = ({content}) => {
 
                 <div className="post-actions px-4 py-2 flex flex-row justify-between text-third-font flex-wrap">
                     <div className="flex flex-row gap-4">
-                        <div className="post-action flex flex-row justify-center items-center gap-2 hover:bg-third-bg p-2 rounded-lg cursor-pointer">
+                        <button className="post-action flex flex-row justify-center items-center gap-2 hover:bg-third-bg p-2 rounded-lg cursor-pointer">
                             <AiOutlineComment/>
                             <p className="m-0 hidden xs:block">8 Comments</p>
-                        </div>
-                        <div className="post-action flex flex-row justify-center items-center gap-2 hover:bg-third-bg p-2 rounded-lg cursor-pointer">
+                        </button>
+                        <button className="post-action flex flex-row justify-center items-center gap-2 hover:bg-third-bg p-2 rounded-lg cursor-pointer">
                             <AiOutlineShareAlt/>
                             <p className="m-0 hidden xs:block">Share</p>
-                        </div>
-                        <div className="post-action md:hidden flex flex-row justify-center items-center gap-2 hover:bg-third-bg p-2 rounded-lg cursor-pointer">
+                        </button>
+                        <button className="post-action md:hidden flex flex-row justify-center items-center gap-2 hover:bg-third-bg p-2 rounded-lg cursor-pointer">
                             <AiOutlineArrowUp/>
                             <p className="m-0">15</p>
-                        </div>
+                        </button>
                     </div>
-                    <div className="post-action flex flex-row justify-center items-center gap-2 hover:bg-third-bg p-2 rounded-lg cursor-pointer">
+                    <button className="post-action flex flex-row justify-center items-center gap-2 hover:bg-third-bg p-2 rounded-lg cursor-pointer">
                         <AiOutlineArrowRight/>
                         <p className="m-0">Read more</p>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ import { CreatePostArguments } from "@/../../../backend/src/util/types"
 import { GraphQLError } from "graphql";
 import { reloadSession } from "@/util/refreshSession";
 import { toast } from "react-hot-toast";
+import Cloud from "@/components/Others/cloud";
 
 interface CreatePostProps {
     
@@ -24,6 +25,8 @@ const CreatePost:React.FC<CreatePostProps> = () => {
     
     const [title, setTitle] = useState("")
     const [post, setPost] = useState("")
+
+    const disabled = post ? false : true
     
     const [createPost, {loading, error}] = useMutation<{sendPost:Boolean}, CreatePostArguments>(postOperations.Mutation.sendPost) 
 
@@ -79,10 +82,14 @@ const CreatePost:React.FC<CreatePostProps> = () => {
                     <Icon icon={AiOutlineFileImage}/>
                     <Icon icon={BsEmojiHeartEyes}/>
                 </div>
-                <Button variant="warning" size="small" disabled={post ? false : true} onClick={onSendPost} >
-                    
-                    Post
-                </Button>
+                <div className="relative group">
+                    <Button variant="warning" size="small" disabled={disabled} onClick={onSendPost}>
+                        
+                        Post
+                    </Button>
+                    {disabled  && <Cloud text="Write something to post" />}
+                </div>
+                
             </div>
         </div>
         ) : "brak"}

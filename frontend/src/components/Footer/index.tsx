@@ -19,7 +19,7 @@ const Footer:React.FC<FooterProps> = () => {
         <footer className="footer flex flex-col p-6 justify-center  mt-14  px-4 md:px-6 lg:px-12 small:px-52 sticky top-[100vh]">
             <div className="flex flex-row justify-between">
                 <div className="footer-logo hover:bg-primary-bg cursor-pointer p-1 rounded-full">
-                    <Image src={Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px]"/>
+                    <Image src={Logo} width={36} height={36} alt="Logo of Maciej Szwast blog site" className="min-h-[36px] min-w-[36px]"/>
                 </div>
                 <div className="footer-links text-third-font lg:flex flex-row justify-center items-center gap-6 hidden">
                     <FooterLink site="/" text ="About"/>

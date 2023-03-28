@@ -18,7 +18,7 @@ const ProfileHeader:React.FC<ProfileHeaderProps> = ({session}) => {
     <>
         <div className="profile-box flex flex-col justify-center items-center relative bg-third-bg rounded-lg mb-4">
             <div className="profile-img absolute -top-6">
-                <Image width={80} height={80} src={user?.image as string} alt="" className="w-20 h-20 rounded-full opacity-90 hover:opacity-100 cursor-pointer" />
+                <Image width={80} height={80} src={user?.image as string} alt={`${user.username} profile image`} className="w-20 h-20 rounded-full opacity-90 hover:opacity-100 cursor-pointer" />
             </div>
             <div className="profile-username flex flex-col items-center">
                 <h1 className="text-second-font mt-16 text-2xl">{user?.name}</h1>

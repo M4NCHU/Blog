@@ -16,6 +16,7 @@ import DropdownLiElement from "../Dropdown/DropdownLi";
 import DropDownLinkElement from "../Dropdown/DropDownLink";
 import useDropdownMenu from "@/util/useDropdownMenu";
 import Button from "../Button";
+import Cloud from "../Others/cloud";
 
 interface HeaderProps {
     session: Session | null
@@ -79,15 +80,18 @@ const Header:React.FC<HeaderProps> = ({session}) => {
         <header className="site-header bg-second-bg p-2 flex flex-row justify-between items-center px-4 xd:px-52 lg:px-40 py-2.5 sticky top-0 z-50">
             
             {/* Header logo */}
-            <div className="header-logo hover:bg-primary-bg cursor-pointer p-1 rounded-full">
+            <div className="header-logo hover:bg-primary-bg cursor-pointer p-1 rounded-full relative group">
                 <Link href="/">
                     
-                    <Image src={Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px]"/>
+                    <Image src={Logo} width={36} height={36} alt="Logo of Maciej Szwast blog site" className="min-h-[36px] min-w-[36px]"/>
                 </Link>
+                <Cloud text="Home page" />
+                        
+                
             </div>
 
             {/* header nav */}
-            <div className="header-nav flex flex-row justify-center items-center ">
+            <div className="header-nav flex flex-row justify-center items-center gap-2">
                 <form action="" method="post" className="header-search-form mdcd :mr-4 relative">
                     <div className="md:flex hidden">
                         <AiOutlineSearch className="text-primary-font text-xl absolute top-[0.6rem] left-2"/>
@@ -99,7 +103,7 @@ const Header:React.FC<HeaderProps> = ({session}) => {
                     
                 </form>
 
-                <div className="header-links flex flex-row justify-center items-center flex-wrap">
+                <div className="header-links flex flex-row justify-center items-center gap-2 flex-wrap">
                     <Link href="/profile">
                         <IconButton icon={<BsSun/>}/>
                     </Link>
@@ -116,7 +120,7 @@ const Header:React.FC<HeaderProps> = ({session}) => {
                     ) : (
                         <>
                         <div className="drop-down-menu relative" ref={dropdownRef}  >
-                            <Image src={user?.user.image ? user?.user.image as string : Logo} width={36} height={36} alt="Logo of blog site" className="min-h-[36px] min-w-[36px] cursor-pointer rounded-full" onClick={handleToggle}/>
+                            <Image src={user?.user.image ? user?.user.image as string : Logo} width={36} height={36} alt={`${user?.user.username} profile image`} className="min-h-[36px] min-w-[36px] cursor-pointer rounded-full" onClick={handleToggle}/>
 
                             <DropDownMenuElement isOpen={isOpen}>
                             {menu.menuItems.map((menuItem) => (

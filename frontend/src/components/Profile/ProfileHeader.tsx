@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import ProfileDropdown from "./ProfileDropdown"
 import ProfileLink from "./ProfileLink";
+import * as ROUTES from "../../constants/routes"
 
 
 interface ProfileHeaderProps {
@@ -26,8 +27,8 @@ const ProfileHeader:React.FC<ProfileHeaderProps> = ({session}) => {
             </div>
             <div className="profile-nav flex justify-between w-full px-8 py-4 bg-second-bg rounded-lg">
                 <div className="flex justify-between gap-8 ">
-                    <ProfileLink text="Posts" href="/"/>
-                    <ProfileLink text="Commented" href="/"/>
+                    <ProfileLink text="Posts" href={ROUTES.HOME}/>
+                    <ProfileLink text="Commented" href={ROUTES.HOME}/>
                 </div>
                 <ProfileDropdown/>     
             </div>

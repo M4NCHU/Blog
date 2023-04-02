@@ -1,4 +1,3 @@
-import Logo from "../../resources/img/logo/diamond.png"
 import Image from 'next/image'
 import { BsSun,  BsBookmarks} from 'react-icons/bs';
 import { BiDotsHorizontalRounded, BiLogIn } from 'react-icons/bi';
@@ -17,6 +16,8 @@ import DropDownLinkElement from "../Dropdown/DropDownLink";
 import useDropdownMenu from "@/util/useDropdownMenu";
 import Button from "../Button";
 import Cloud from "../Others/cloud";
+import SiteImage from "../Others/SiteImage";
+import * as ROUTES from "../../constants/routes"
 
 interface HeaderProps {
     session: Session | null
@@ -49,27 +50,27 @@ const Header:React.FC<HeaderProps> = ({session}) => {
           {
             id: 1,
             label: 'Profile',
-            url: '/profile',
+            url: ROUTES.PROFILE,
           },
           {
             id: 2,
             label: 'About Us',
-            url: '/about',
+            url: ROUTES.ABOUT,
           },
           {
             id: 3,
             label: 'Services',
-            url: '/services',
+            url: ROUTES.ABOUT,
           },
           {
             id: 4,
             label: 'Blog',
-            url: '/blog',
+            url: ROUTES.HOME,
           },
           {
             id: 5,
             label: 'Contact Us',
-            url: '/contact',
+            url: ROUTES.CONTACT,
           },
         ],
       });
@@ -81,13 +82,7 @@ const Header:React.FC<HeaderProps> = ({session}) => {
             
             {/* Header logo */}
             <div className="header-logo hover:bg-primary-bg cursor-pointer p-1 rounded-full relative group">
-                <Link href="/">
-                    
-                    <Image src={Logo} width={36} height={36} alt="Logo of Maciej Szwast blog site" className="min-h-[36px] min-w-[36px]"/>
-                </Link>
-                <Cloud text="Home page" />
-                        
-                
+                <SiteImage />   
             </div>
 
             {/* header nav */}
@@ -97,24 +92,24 @@ const Header:React.FC<HeaderProps> = ({session}) => {
                         <AiOutlineSearch className="text-primary-font text-xl absolute top-[0.6rem] left-2"/>
                         <input placeholder="Type to search..." className="Header-input text-primary-font bg-third-bg focus:ring-2 focus:ring-third-bg font-medium rounded-lg text-sm pl-10 pr-2 py-2.5 focus:outline-none"/>
                     </div>
-                    <Link href="/" className="block md:hidden">
+                    <Link href={ROUTES.HOME} className="block md:hidden">
                         <IconButton icon={<AiOutlineSearch/>}/>
                     </Link>
                     
                 </form>
 
                 <div className="header-links flex flex-row justify-center items-center gap-2 flex-wrap">
-                    <Link href="/profile">
+                    <Link href={ROUTES.PROFILE}>
                         <IconButton icon={<BsSun/>}/>
                     </Link>
-                    <Link href="/about">
+                    <Link href={ROUTES.HOME}>
                         <IconButton icon={<BsBookmarks/>}/>
                     </Link>
                 </div>
 
                 <div className="header-button ml-4 re">
                     {!session ? (
-                        <Link href="/login">
+                        <Link href={ROUTES.LOGIN}>
                             <HeaderButton text="login" icon={<BiLogIn/>}/>
                         </Link>
                     ) : (

@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { AiOutlineArrowUp, AiOutlineComment } from "react-icons/ai"
 import ProfileImg from "../../../resources/categories-img/photo-1575936123452-b67c3203c357.jpeg"
 
@@ -10,7 +11,7 @@ const ShowcaseItem:React.FC<ShowcaseItemProps> = () => {
         <div className="post-content bg-second-bg rounded-lg">
                 <div className="post-header p-4 flex justify-between items-center">
                     <div className="flex flex-row gap-4 justify-center items-center">
-                        <img src={ProfileImg.src} alt="" className="w-8 h-8 rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
+                        <Image width={32} height={32} src={ProfileImg.src} alt="" className="w-8 h-8 rounded-lg opacity-90 hover:opacity-100 cursor-pointer" />
                         <h2 className="post-category text-sm text-second-font">Photography</h2>
                     </div>
                     <div className="post-added text-third-font text-xs m-0">

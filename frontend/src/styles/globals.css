@@ -132,6 +132,20 @@ p {
   .btn-warning:hover {
     @apply bg-primary-warning;
   }
+
+  .btn-transparent {
+    @apply bg-transparent text-third-font text-sm gap-1 ;
+    
+  }
+
+  .btn-transparent p {
+    @apply hidden md:block ;
+    
+  }
+  
+  .btn-transparent:hover {
+    @apply bg-third-bg;
+  }
   
   .btn-small {
     @apply py-2 px-4;
@@ -154,6 +168,11 @@ p {
   .btn-icon-wrapper {
     @apply mr-2;
   }
+
+  a .active{
+    @apply text-red-500;
+  }
+
   /* ... */
 
 

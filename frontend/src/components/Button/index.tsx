@@ -5,7 +5,7 @@ import { FaSpinner } from 'react-icons/fa';
 
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'warning';
+  variant?: 'primary' | 'secondary' | 'warning' | "transparent";
   size?: 'small' | 'medium' | 'large' | "xl";
   icon?: React.ReactNode;
   loading?: boolean
@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({ children, variant = 'primary', size = '
   const iconClass = icon ? 'btn-icon' : '';
 
   return (
-    <button className={`btn ${variantClass} ${sizeClass} ${iconClass} gap-2 ${addClass}`} {...props}>
+    <button className={`btn ${variantClass} ${sizeClass} ${iconClass}  ${addClass}`} {...props}>
       {loading ? <AiOutlineLoading className="animate-spin"/> : icon && <span className="btn-icon-wrapper">{icon}</span>}
       {children}
     </button>

@@ -55,3 +55,26 @@ export interface CreateTagVariables {
 export interface TagData {
     readTags: Array<Tag>
 }
+
+
+/**
+ * Likes
+ */
+
+export interface Like {
+    id: string
+    userId: string
+    postId: string
+}
+
+export interface CreateLikeVariables {
+    
+}
+
+export interface LikeData {
+    postLikes: Array<Like>
+}
+
+export interface LikeVariables {
+    postId: string
+}

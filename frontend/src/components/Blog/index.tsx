@@ -13,6 +13,7 @@ import Pagination from "../Pagination"
 import BlogHeader from "./Header"
 import ActiveLink from "../Links/Index"
 import * as ROUTES from "../../constants/routes"
+import { useSession } from "next-auth/react"
 
 
 interface BlogProps {
@@ -20,9 +21,9 @@ interface BlogProps {
 }
 
 const Blog:React.FC<BlogProps> = ({})  => {
-
-    const {data, loading, error} = useQuery<PostsData, null>(postOperations.Query.readPosts)
-    const content = data?.readPosts
+    const {data: sessionData} = useSession()
+    const {data:postData, loading, error} = useQuery<PostsData, null>(postOperations.Query.readPosts)
+    const content = postData?.readPosts
     
     const sortedPosts = content ? [...content].sort((a,b) => b.updatedAt.valueOf()-a.updatedAt.valueOf()) : [];
 
@@ -45,7 +46,7 @@ const Blog:React.FC<BlogProps> = ({})  => {
                     {sortedPosts &&
                     
                     sortedPosts.map((post) => (
-                        <Post post={post} key={post.id}/>
+                        <Post post={post} key={post.id} session={sessionData && sessionData}/>
                     ))}
                     
                 </div>

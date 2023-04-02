@@ -49,7 +49,7 @@ const CreatePost:React.FC<CreatePostProps> = () => {
                 title,
                 authorId,
             }})
-
+            
             if (!data?.sendPost) {
                 throw new Error("Failed to send post!")
             }

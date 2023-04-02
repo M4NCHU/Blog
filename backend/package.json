@@ -11,7 +11,7 @@
   "description": "",
   "dependencies": {
     "@apollo/server": "^4.5.0",
-    "@prisma/client": "^4.11.0",
+    "@prisma/client": "^4.12.0",
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
@@ -24,7 +24,7 @@
     "@types/lodash.merge": "^4.6.7",
     "@types/node": "^18.15.3",
     "nodemon": "^2.0.21",
-    "prisma": "^4.11.0",
+    "prisma": "^4.12.0",
     "typescript": "^5.0.2"
   }
 }

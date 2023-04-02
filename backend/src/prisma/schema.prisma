@@ -48,7 +48,7 @@ model User {
     // role          Role      @default(USER)
     posts         Post[]
     // Comment       Comment[]
-    // Like          Like[]
+    Like          Like[]
 }
 
 model VerificationToken {
@@ -72,7 +72,7 @@ model Post {
     image     String?
     // comments  Comment[]
     tags      PostTag[]
-    // Like      Like[]
+    Like      Like[]
 }
 
 // model Comment {
@@ -86,15 +86,15 @@ model Post {
 //     postId    String
 // }
 
-// model Like {
-//     id     String @id @default(auto()) @map("_id") @db.ObjectId
-//     userId String
-//     user   User   @relation(fields: [userId], references: [id])
-//     postId String
-//     post   Post   @relation(fields: [postId], references: [id])
+model Like {
+    id     String @id @default(auto()) @map("_id") @db.ObjectId
+    userId String
+    user   User   @relation(fields: [userId], references: [id])
+    postId String
+    post   Post   @relation(fields: [postId], references: [id])
 
-//     @@unique([userId, postId])
-// }
+    @@unique([userId, postId])
+}
 
 model Tag {
     id      String    @id @default(auto()) @map("_id") @db.ObjectId

@@ -54,6 +54,17 @@ export interface CreateTagArguments {
 
 
 /**
+ * Likes
+ */
+
+export interface SendLikeArguments {
+    id: string
+    userId: string
+    postId: string
+}
+
+
+/**
  * Payloads
  */
 

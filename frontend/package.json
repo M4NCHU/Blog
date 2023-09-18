@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "generate-prisma": "prisma generate --schema=./src/prisma/schema.prisma",
-    "postinstall": "prisma generate --schema=./src/prisma/schema.prisma"
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@apollo/client": "^3.7.10",

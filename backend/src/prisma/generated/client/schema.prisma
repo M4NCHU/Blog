@@ -1,0 +1,119 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("MONGODB_URI")
+}
+
+generator client {
+    provider      = "prisma-client-js"
+    binaryTargets = ["native", "darwin", "rhel-openssl-3.0.x"]
+    output        = "./generated/client"
+}
+
+model Account {
+    id                String  @id @default(auto()) @map("_id") @db.ObjectId
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? @db.String
+    access_token      String? @db.String
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.String
+    session_state     String?
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+}
+
+model Session {
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+    id            String    @id @default(auto()) @map("_id") @db.ObjectId
+    name          String?
+    email         String?   @unique
+    username      String?   @unique
+    emailVerified DateTime?
+    image         String?
+    // createdAt     DateTime  @default(now())
+    accounts      Account[]
+    sessions      Session[]
+    // role          Role      @default(USER)
+    posts         Post[]
+    // Comment       Comment[]
+    Like          Like[]
+}
+
+model VerificationToken {
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    identifier String
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+}
+
+model Post {
+    id        String    @id @default(auto()) @map("_id") @db.ObjectId
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    published Boolean   @default(false)
+    title     String
+    desc      String
+    author    User?     @relation(fields: [authorId], references: [id])
+    authorId  String
+    image     String?
+    // comments  Comment[]
+    tags      PostTag[]
+    Like      Like[]
+}
+
+// model Comment {
+//     id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//     content   String
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+//     author    User     @relation(fields: [authorId], references: [id])
+//     authorId  String
+//     post      Post     @relation(fields: [postId], references: [id])
+//     postId    String
+// }
+
+model Like {
+    id     String @id @default(auto()) @map("_id") @db.ObjectId
+    userId String
+    user   User   @relation(fields: [userId], references: [id])
+    postId String
+    post   Post   @relation(fields: [postId], references: [id])
+
+    @@unique([userId, postId])
+}
+
+model Tag {
+    id      String    @id @default(auto()) @map("_id") @db.ObjectId
+    tagName String    @unique
+    posts   PostTag[]
+}
+
+model PostTag {
+    id     String @id @default(auto()) @map("_id") @db.ObjectId
+    post   Post?  @relation(fields: [postId], references: [id])
+    postId String
+    tag    Tag?   @relation(fields: [tagId], references: [id])
+    tagId  String
+
+    @@unique([postId, tagId])
+}
+
+enum Role {
+    USER
+    ADMIN
+}

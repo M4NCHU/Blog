@@ -10,7 +10,7 @@ const resolvers = {
             context: GraphQlContext
         ) : Promise<Array<Tag>> => {
             const {prisma} = context
-            console.log("xd")
+            
             try {
                 const tags = await prisma.tag.findMany()
                 
